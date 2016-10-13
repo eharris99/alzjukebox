@@ -1,21 +1,8 @@
-var users = [
-  { firstName : 'Audrey', 
-  lastName : 'Hepburn',
-  email: 'audrey@gmail.com',
-  password: '1234'
-},
-{ firstName : 'Fred', 
-  lastName : 'Flintstone',
-  email: '1234@gmail.com',
-  password: '1234'
-},
-  
-];
-
+<html>
 <div class="container">
     <h3>List of Users</h3> 
     <div>
-        {{# each users }}
+        {{# each . }}
             <article class="item">
                 <div>First Name: {{ this.firstName }} </div>
                 <div>Last Name: {{ this.lastName }} </div> 
@@ -24,3 +11,4 @@ var users = [
         {{/each}}
     </div>
 </div>
+</html>

@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var path = require('path');
 var users = require('./controllers/UserController');
+var index = require('./controllers/index');
 var routes = require('./routes/api.js');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -9,7 +10,7 @@ var api = require('./routes/api');
 var connect = require('connect');
 var handlebars = require('handlebars');
 var http = require('http');
-
+var User = require('./models/User.js')
 
 var dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/alzjukebox'
 mongoose.connect(dbUrl, function(err, res){
@@ -67,10 +68,19 @@ var users = [
 ];
 
 app.get('/index', function(req, res) {
-  
-    res.json(users);
-  
+  User.find({}, function(err, users) {
+    var userMap = {};
+    users.forEach(function(user) {
+      userMap[user._id] = user;
+    });
+    res.send(userMap);  
+    // res.render('./index.hjs');  
+  });
 });
+
+
+
+
 
 
 // POST method route
